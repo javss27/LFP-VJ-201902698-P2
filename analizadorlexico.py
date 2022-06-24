@@ -1,6 +1,6 @@
 import ply.lex as lex
 result_lexema=[]
-reservada = {
+reservada = (
     'STRING',
     'INT',
     'DOUBLE',
@@ -8,9 +8,9 @@ reservada = {
     'BOOLEAN',
     'VOID'
     'RETURN'
-}
+)
 
-tokens = reservada + {
+tokens = reservada + (
     'ID',
     'ENTERO',
     'DECIMAL',
@@ -19,10 +19,12 @@ tokens = reservada + {
     #operaciones
     'SUMA',
     'RESTA',
-    'MULTIPLICACION',
-    'DIVISION',
-    'MODULO',
-    
+    'MULT',
+    'DIV',
+    'MOD',
+    'MENORQUE',
+    'MAYORQUE',
+
     #LOGICA
     'IGUALACION',
     'DIFERENCIACION',
@@ -32,7 +34,7 @@ tokens = reservada + {
     'MENORIGUAL',
     'AND',
     'OR',
-    'NOT'
+    'NOT',
 
     #CILCOS
     'WHILE',
@@ -49,12 +51,13 @@ tokens = reservada + {
     'LLAVEIZQ',
     'LLAVEDER',
 
-    'PUNTO'
+    'PUNTO',
     'PUNTOCOMA',
     'COMA',
     'COMILLA',
-    'COMDOBLE'
-}
+    'COMDOBLE',
+
+)
 
 #reglas exp regulares
 t_SUMA = r'\+'
@@ -70,9 +73,9 @@ t_NOT = r'\!'
 t_MENORQUE = r'\<'
 t_MAYORQUE = r'\>'
 
-t_PUNTOCOMA = r';'
-t_PUNTO = r'.'
-t_COMA = r','
+t_PUNTOCOMA = r'\;'
+t_PUNTO = r'\.'
+t_COMA = r'\,'
 t_COMILLA =r'\''
 t_COMDOBLE = r'\"'
 
@@ -158,4 +161,38 @@ def t_ELSE(t):
     r'else'
     return t
 
+#COMENTARIOS
+def t_COMENTLINE(t):
+    r'\/\/(.)*\n'
+    t.lexer.lineno +=1
 
+t_ignore= ' \t'
+
+def t_error(t):
+    global result_lexema
+    estado = "Toke no valido en la linea {:4} Valor {:6}".format(str(t.lineno),str(t.value),str(t.lexpos))
+    result_lexema.append(estado)
+    t.lexer.skip(1)
+
+
+def prueba(data):
+    global result_lexema
+
+    analizador = lex.lex()
+    analizador.input(data)
+
+    result_lexema.clear()
+    while True:
+        tok = analizador.token()
+        if not tok:
+            break
+        estado = "Linea {:4} Tipo {:6} Valor {:16} Posicion {:4}".format(str(tok.lineno),str(tok.type),str(tok.value),str(tok.lexpos))
+        result_lexema.append(estado)
+    return result_lexema                            
+
+analizado = lex.lex()
+if __name__ == '__main__':
+    while True:
+        data = input("ingrese:")
+        prueba(data)
+        print(result_lexema)
