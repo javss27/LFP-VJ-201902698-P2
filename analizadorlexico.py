@@ -12,8 +12,9 @@ reservada = (
 
 tokens = reservada + (
     'ID',
-    'ENTERO',
     'DECIMAL',
+    'ENTERO',
+    
     
     
     #operaciones
@@ -193,6 +194,7 @@ def prueba(data):
 analizado = lex.lex()
 if __name__ == '__main__':
     while True:
-        data = input("ingrese:")
+        data = input("ingrese:").lower()
         prueba(data)
         print(result_lexema)
+        print(len(result_lexema))
