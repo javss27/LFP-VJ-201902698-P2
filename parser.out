@@ -1,0 +1,259 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    AND
+    COMA
+    COMDOBLE
+    COMILLA
+    DIFERENCIACION
+    DIV
+    DO
+    ELSE
+    IF
+    IGUALACION
+    LLAVEDER
+    LLAVEIZQ
+    MAYOR
+    MAYORIGUAL
+    MAYORQUE
+    MENOR
+    MENORIGUAL
+    MENORQUE
+    MOD
+    MULT
+    NOT
+    OR
+    PARDER
+    PARIZQ
+    PUNTO
+    PUNTOCOMA
+    RESTA
+    RETURN
+    SUMA
+    VOID
+    WHILE
+
+Grammar
+
+Rule 0     S' -> declaracion
+Rule 1     declaracion -> STRING ID IGUAL CADENA
+Rule 2     declaracion -> CHAR ID IGUAL CARACTER
+Rule 3     declaracion -> INT ID IGUAL ENTERO
+Rule 4     declaracion -> DOUBLE ID IGUAL DECIMAL
+Rule 5     declaracion -> BOOLEAN ID IGUAL ID
+
+Terminals, with rules where they appear
+
+AND                  : 
+BOOLEAN              : 5
+CADENA               : 1
+CARACTER             : 2
+CHAR                 : 2
+COMA                 : 
+COMDOBLE             : 
+COMILLA              : 
+DECIMAL              : 4
+DIFERENCIACION       : 
+DIV                  : 
+DO                   : 
+DOUBLE               : 4
+ELSE                 : 
+ENTERO               : 3
+ID                   : 1 2 3 4 5 5
+IF                   : 
+IGUAL                : 1 2 3 4 5
+IGUALACION           : 
+INT                  : 3
+LLAVEDER             : 
+LLAVEIZQ             : 
+MAYOR                : 
+MAYORIGUAL           : 
+MAYORQUE             : 
+MENOR                : 
+MENORIGUAL           : 
+MENORQUE             : 
+MOD                  : 
+MULT                 : 
+NOT                  : 
+OR                   : 
+PARDER               : 
+PARIZQ               : 
+PUNTO                : 
+PUNTOCOMA            : 
+RESTA                : 
+RETURN               : 
+STRING               : 1
+SUMA                 : 
+VOID                 : 
+WHILE                : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+declaracion          : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . declaracion
+    (1) declaracion -> . STRING ID IGUAL CADENA
+    (2) declaracion -> . CHAR ID IGUAL CARACTER
+    (3) declaracion -> . INT ID IGUAL ENTERO
+    (4) declaracion -> . DOUBLE ID IGUAL DECIMAL
+    (5) declaracion -> . BOOLEAN ID IGUAL ID
+
+    STRING          shift and go to state 2
+    CHAR            shift and go to state 3
+    INT             shift and go to state 4
+    DOUBLE          shift and go to state 5
+    BOOLEAN         shift and go to state 6
+
+    declaracion                    shift and go to state 1
+
+state 1
+
+    (0) S' -> declaracion .
+
+
+
+state 2
+
+    (1) declaracion -> STRING . ID IGUAL CADENA
+
+    ID              shift and go to state 7
+
+
+state 3
+
+    (2) declaracion -> CHAR . ID IGUAL CARACTER
+
+    ID              shift and go to state 8
+
+
+state 4
+
+    (3) declaracion -> INT . ID IGUAL ENTERO
+
+    ID              shift and go to state 9
+
+
+state 5
+
+    (4) declaracion -> DOUBLE . ID IGUAL DECIMAL
+
+    ID              shift and go to state 10
+
+
+state 6
+
+    (5) declaracion -> BOOLEAN . ID IGUAL ID
+
+    ID              shift and go to state 11
+
+
+state 7
+
+    (1) declaracion -> STRING ID . IGUAL CADENA
+
+    IGUAL           shift and go to state 12
+
+
+state 8
+
+    (2) declaracion -> CHAR ID . IGUAL CARACTER
+
+    IGUAL           shift and go to state 13
+
+
+state 9
+
+    (3) declaracion -> INT ID . IGUAL ENTERO
+
+    IGUAL           shift and go to state 14
+
+
+state 10
+
+    (4) declaracion -> DOUBLE ID . IGUAL DECIMAL
+
+    IGUAL           shift and go to state 15
+
+
+state 11
+
+    (5) declaracion -> BOOLEAN ID . IGUAL ID
+
+    IGUAL           shift and go to state 16
+
+
+state 12
+
+    (1) declaracion -> STRING ID IGUAL . CADENA
+
+    CADENA          shift and go to state 17
+
+
+state 13
+
+    (2) declaracion -> CHAR ID IGUAL . CARACTER
+
+    CARACTER        shift and go to state 18
+
+
+state 14
+
+    (3) declaracion -> INT ID IGUAL . ENTERO
+
+    ENTERO          shift and go to state 19
+
+
+state 15
+
+    (4) declaracion -> DOUBLE ID IGUAL . DECIMAL
+
+    DECIMAL         shift and go to state 20
+
+
+state 16
+
+    (5) declaracion -> BOOLEAN ID IGUAL . ID
+
+    ID              shift and go to state 21
+
+
+state 17
+
+    (1) declaracion -> STRING ID IGUAL CADENA .
+
+    $end            reduce using rule 1 (declaracion -> STRING ID IGUAL CADENA .)
+
+
+state 18
+
+    (2) declaracion -> CHAR ID IGUAL CARACTER .
+
+    $end            reduce using rule 2 (declaracion -> CHAR ID IGUAL CARACTER .)
+
+
+state 19
+
+    (3) declaracion -> INT ID IGUAL ENTERO .
+
+    $end            reduce using rule 3 (declaracion -> INT ID IGUAL ENTERO .)
+
+
+state 20
+
+    (4) declaracion -> DOUBLE ID IGUAL DECIMAL .
+
+    $end            reduce using rule 4 (declaracion -> DOUBLE ID IGUAL DECIMAL .)
+
+
+state 21
+
+    (5) declaracion -> BOOLEAN ID IGUAL ID .
+
+    $end            reduce using rule 5 (declaracion -> BOOLEAN ID IGUAL ID .)
+

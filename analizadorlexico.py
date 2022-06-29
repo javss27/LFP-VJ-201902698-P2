@@ -232,7 +232,7 @@ def prueba(data):
         result_lexema.append(estado)
         #print("Linea:",str(tok.lineno), tok,"columna:",tok.lexpos,getColumn(tok))                          
 
-#analizador = lex.lex()
+analizador = lex.lex()
 """ if __name__ == '__main__':
     while True:
         data = input("ingrese:").lower()
@@ -258,4 +258,4 @@ def lecturaArchivo(ruta):     # validacion de la extension correcta
 
 
 #C:/Users/otrop/Desktop/LFP-JV-201902689-P1/pruebita.sc
-lecturaArchivo("C:/Users/otrop/Desktop/LFP-JV-201902689-P2/prueba.sc")
+#lecturaArchivo("C:/Users/otrop/Desktop/LFP-JV-201902689-P2/prueba.sc")

@@ -70,5 +70,30 @@ char metodochar(int num, int 3){
 			return False
 		}
 		return char
+
 	}
 };
+
+
+string cadena = "perro"
+char a = 'b'
+int num = 1
+double decimal = 3.33
+boolean ver = true
+boolean ver2 = true
+int num_2 = 2
+
+void metodovoid(){
+	string cadenita = ""
+}
+
+void metodovoid2(string a){
+	metodovoid()
+	if(a == "aber"){
+	}
+	if(a == "aber2"){
+		continue;
+	}else{
+		metodovoid2("cadenaA")
+	}
+}
