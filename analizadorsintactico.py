@@ -264,6 +264,7 @@ def p_instruccion(p):
                 | COMENTLINE
                 | COMENTLINES
                 | llamada
+                | retorno
     '''
     global AST
     id_padre = str(p.lexer.lineno)+str(p.lexpos)+'instruccion'
