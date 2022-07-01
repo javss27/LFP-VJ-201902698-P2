@@ -143,7 +143,7 @@ def p_retorno(p):
     id_padre = str(p.lexer.lineno)+str(p.lexpos)+'retorno'
     AST.node(id_padre,'retorno')
 
-    if len(p) = 4:
+    if len(p) == 4:
         hijo1 = resultado_grmatica.pop()
         AST.edge(id_padre,str(p.lexer.lineno)+str(p.lexpos)+p[1])
         p[0] = p[2]
