@@ -3,7 +3,6 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 Unused terminals:
 
     AND
-    COMA
     COMDOBLE
     COMILLA
     DIFERENCIACION
@@ -24,47 +23,57 @@ Unused terminals:
     MULT
     NOT
     OR
-    PARDER
-    PARIZQ
     PUNTO
-    PUNTOCOMA
     RESTA
     RETURN
     SUMA
-    VOID
     WHILE
 
 Grammar
 
 Rule 0     S' -> declaracion
-Rule 1     declaracion -> STRING ID IGUAL CADENA
-Rule 2     declaracion -> CHAR ID IGUAL CARACTER
-Rule 3     declaracion -> INT ID IGUAL ENTERO
-Rule 4     declaracion -> DOUBLE ID IGUAL DECIMAL
-Rule 5     declaracion -> BOOLEAN ID IGUAL ID
+Rule 1     declaracion -> STRING ID IGUAL CADENA PUNTOCOMA
+Rule 2     declaracion -> INT ID IGUAL ENTERO PUNTOCOMA
+Rule 3     declaracion -> CHAR ID IGUAL CARACTER PUNTOCOMA
+Rule 4     declaracion -> DOUBLE ID IGUAL DECIMAL PUNTOCOMA
+Rule 5     declaracion -> BOOLEAN ID IGUAL ID PUNTOCOMA
+Rule 6     declaracion -> ID IGUAL identificador PUNTOCOMA
+Rule 7     declaracion -> VOID ID PARIZQ parametros PARDER
+Rule 8     identificador -> DECIMAL
+Rule 9     identificador -> CARACTER
+Rule 10    identificador -> ID
+Rule 11    identificador -> CADENA
+Rule 12    parametros -> STRING ID
+Rule 13    parametros -> STRING ID COMA
+Rule 14    parametros -> INT ID
+Rule 15    parametros -> INT ID COMA parametros
+Rule 16    parametros -> DOUBLE ID
+Rule 17    parametros -> DOUBLE ID COMA parametros
+Rule 18    parametros -> CHAR ID
+Rule 19    parametros -> CHAR ID COMA parametros
 
 Terminals, with rules where they appear
 
 AND                  : 
 BOOLEAN              : 5
-CADENA               : 1
-CARACTER             : 2
-CHAR                 : 2
-COMA                 : 
+CADENA               : 1 11
+CARACTER             : 3 9
+CHAR                 : 3 18 19
+COMA                 : 13 15 17 19
 COMDOBLE             : 
 COMILLA              : 
-DECIMAL              : 4
+DECIMAL              : 4 8
 DIFERENCIACION       : 
 DIV                  : 
 DO                   : 
-DOUBLE               : 4
+DOUBLE               : 4 16 17
 ELSE                 : 
-ENTERO               : 3
-ID                   : 1 2 3 4 5 5
+ENTERO               : 2
+ID                   : 1 2 3 4 5 5 6 7 10 12 13 14 15 16 17 18 19
 IF                   : 
-IGUAL                : 1 2 3 4 5
+IGUAL                : 1 2 3 4 5 6
 IGUALACION           : 
-INT                  : 3
+INT                  : 2 14 15
 LLAVEDER             : 
 LLAVEIZQ             : 
 MAYOR                : 
@@ -77,38 +86,44 @@ MOD                  :
 MULT                 : 
 NOT                  : 
 OR                   : 
-PARDER               : 
-PARIZQ               : 
+PARDER               : 7
+PARIZQ               : 7
 PUNTO                : 
-PUNTOCOMA            : 
+PUNTOCOMA            : 1 2 3 4 5 6
 RESTA                : 
 RETURN               : 
-STRING               : 1
+STRING               : 1 12 13
 SUMA                 : 
-VOID                 : 
+VOID                 : 7
 WHILE                : 
 error                : 
 
 Nonterminals, with rules where they appear
 
 declaracion          : 0
+identificador        : 6
+parametros           : 7 15 17 19
 
 Parsing method: LALR
 
 state 0
 
     (0) S' -> . declaracion
-    (1) declaracion -> . STRING ID IGUAL CADENA
-    (2) declaracion -> . CHAR ID IGUAL CARACTER
-    (3) declaracion -> . INT ID IGUAL ENTERO
-    (4) declaracion -> . DOUBLE ID IGUAL DECIMAL
-    (5) declaracion -> . BOOLEAN ID IGUAL ID
+    (1) declaracion -> . STRING ID IGUAL CADENA PUNTOCOMA
+    (2) declaracion -> . INT ID IGUAL ENTERO PUNTOCOMA
+    (3) declaracion -> . CHAR ID IGUAL CARACTER PUNTOCOMA
+    (4) declaracion -> . DOUBLE ID IGUAL DECIMAL PUNTOCOMA
+    (5) declaracion -> . BOOLEAN ID IGUAL ID PUNTOCOMA
+    (6) declaracion -> . ID IGUAL identificador PUNTOCOMA
+    (7) declaracion -> . VOID ID PARIZQ parametros PARDER
 
     STRING          shift and go to state 2
-    CHAR            shift and go to state 3
     INT             shift and go to state 4
-    DOUBLE          shift and go to state 5
-    BOOLEAN         shift and go to state 6
+    CHAR            shift and go to state 5
+    DOUBLE          shift and go to state 6
+    BOOLEAN         shift and go to state 7
+    ID              shift and go to state 3
+    VOID            shift and go to state 8
 
     declaracion                    shift and go to state 1
 
@@ -120,140 +135,439 @@ state 1
 
 state 2
 
-    (1) declaracion -> STRING . ID IGUAL CADENA
-
-    ID              shift and go to state 7
-
-
-state 3
-
-    (2) declaracion -> CHAR . ID IGUAL CARACTER
-
-    ID              shift and go to state 8
-
-
-state 4
-
-    (3) declaracion -> INT . ID IGUAL ENTERO
+    (1) declaracion -> STRING . ID IGUAL CADENA PUNTOCOMA
 
     ID              shift and go to state 9
 
 
-state 5
+state 3
 
-    (4) declaracion -> DOUBLE . ID IGUAL DECIMAL
+    (6) declaracion -> ID . IGUAL identificador PUNTOCOMA
 
-    ID              shift and go to state 10
+    IGUAL           shift and go to state 10
 
 
-state 6
+state 4
 
-    (5) declaracion -> BOOLEAN . ID IGUAL ID
+    (2) declaracion -> INT . ID IGUAL ENTERO PUNTOCOMA
 
     ID              shift and go to state 11
 
 
+state 5
+
+    (3) declaracion -> CHAR . ID IGUAL CARACTER PUNTOCOMA
+
+    ID              shift and go to state 12
+
+
+state 6
+
+    (4) declaracion -> DOUBLE . ID IGUAL DECIMAL PUNTOCOMA
+
+    ID              shift and go to state 13
+
+
 state 7
 
-    (1) declaracion -> STRING ID . IGUAL CADENA
+    (5) declaracion -> BOOLEAN . ID IGUAL ID PUNTOCOMA
 
-    IGUAL           shift and go to state 12
+    ID              shift and go to state 14
 
 
 state 8
 
-    (2) declaracion -> CHAR ID . IGUAL CARACTER
+    (7) declaracion -> VOID . ID PARIZQ parametros PARDER
 
-    IGUAL           shift and go to state 13
+    ID              shift and go to state 15
 
 
 state 9
 
-    (3) declaracion -> INT ID . IGUAL ENTERO
-
-    IGUAL           shift and go to state 14
-
-
-state 10
-
-    (4) declaracion -> DOUBLE ID . IGUAL DECIMAL
-
-    IGUAL           shift and go to state 15
-
-
-state 11
-
-    (5) declaracion -> BOOLEAN ID . IGUAL ID
+    (1) declaracion -> STRING ID . IGUAL CADENA PUNTOCOMA
 
     IGUAL           shift and go to state 16
 
 
+state 10
+
+    (6) declaracion -> ID IGUAL . identificador PUNTOCOMA
+    (8) identificador -> . DECIMAL
+    (9) identificador -> . CARACTER
+    (10) identificador -> . ID
+    (11) identificador -> . CADENA
+
+    DECIMAL         shift and go to state 19
+    CARACTER        shift and go to state 20
+    ID              shift and go to state 17
+    CADENA          shift and go to state 21
+
+    identificador                  shift and go to state 18
+
+state 11
+
+    (2) declaracion -> INT ID . IGUAL ENTERO PUNTOCOMA
+
+    IGUAL           shift and go to state 22
+
+
 state 12
 
-    (1) declaracion -> STRING ID IGUAL . CADENA
+    (3) declaracion -> CHAR ID . IGUAL CARACTER PUNTOCOMA
 
-    CADENA          shift and go to state 17
+    IGUAL           shift and go to state 23
 
 
 state 13
 
-    (2) declaracion -> CHAR ID IGUAL . CARACTER
+    (4) declaracion -> DOUBLE ID . IGUAL DECIMAL PUNTOCOMA
 
-    CARACTER        shift and go to state 18
+    IGUAL           shift and go to state 24
 
 
 state 14
 
-    (3) declaracion -> INT ID IGUAL . ENTERO
+    (5) declaracion -> BOOLEAN ID . IGUAL ID PUNTOCOMA
 
-    ENTERO          shift and go to state 19
+    IGUAL           shift and go to state 25
 
 
 state 15
 
-    (4) declaracion -> DOUBLE ID IGUAL . DECIMAL
+    (7) declaracion -> VOID ID . PARIZQ parametros PARDER
 
-    DECIMAL         shift and go to state 20
+    PARIZQ          shift and go to state 26
 
 
 state 16
 
-    (5) declaracion -> BOOLEAN ID IGUAL . ID
+    (1) declaracion -> STRING ID IGUAL . CADENA PUNTOCOMA
 
-    ID              shift and go to state 21
+    CADENA          shift and go to state 27
 
 
 state 17
 
-    (1) declaracion -> STRING ID IGUAL CADENA .
+    (10) identificador -> ID .
 
-    $end            reduce using rule 1 (declaracion -> STRING ID IGUAL CADENA .)
+    PUNTOCOMA       reduce using rule 10 (identificador -> ID .)
 
 
 state 18
 
-    (2) declaracion -> CHAR ID IGUAL CARACTER .
+    (6) declaracion -> ID IGUAL identificador . PUNTOCOMA
 
-    $end            reduce using rule 2 (declaracion -> CHAR ID IGUAL CARACTER .)
+    PUNTOCOMA       shift and go to state 28
 
 
 state 19
 
-    (3) declaracion -> INT ID IGUAL ENTERO .
+    (8) identificador -> DECIMAL .
 
-    $end            reduce using rule 3 (declaracion -> INT ID IGUAL ENTERO .)
+    PUNTOCOMA       reduce using rule 8 (identificador -> DECIMAL .)
 
 
 state 20
 
-    (4) declaracion -> DOUBLE ID IGUAL DECIMAL .
+    (9) identificador -> CARACTER .
 
-    $end            reduce using rule 4 (declaracion -> DOUBLE ID IGUAL DECIMAL .)
+    PUNTOCOMA       reduce using rule 9 (identificador -> CARACTER .)
 
 
 state 21
 
-    (5) declaracion -> BOOLEAN ID IGUAL ID .
+    (11) identificador -> CADENA .
 
-    $end            reduce using rule 5 (declaracion -> BOOLEAN ID IGUAL ID .)
+    PUNTOCOMA       reduce using rule 11 (identificador -> CADENA .)
+
+
+state 22
+
+    (2) declaracion -> INT ID IGUAL . ENTERO PUNTOCOMA
+
+    ENTERO          shift and go to state 29
+
+
+state 23
+
+    (3) declaracion -> CHAR ID IGUAL . CARACTER PUNTOCOMA
+
+    CARACTER        shift and go to state 30
+
+
+state 24
+
+    (4) declaracion -> DOUBLE ID IGUAL . DECIMAL PUNTOCOMA
+
+    DECIMAL         shift and go to state 31
+
+
+state 25
+
+    (5) declaracion -> BOOLEAN ID IGUAL . ID PUNTOCOMA
+
+    ID              shift and go to state 32
+
+
+state 26
+
+    (7) declaracion -> VOID ID PARIZQ . parametros PARDER
+    (12) parametros -> . STRING ID
+    (13) parametros -> . STRING ID COMA
+    (14) parametros -> . INT ID
+    (15) parametros -> . INT ID COMA parametros
+    (16) parametros -> . DOUBLE ID
+    (17) parametros -> . DOUBLE ID COMA parametros
+    (18) parametros -> . CHAR ID
+    (19) parametros -> . CHAR ID COMA parametros
+
+    STRING          shift and go to state 34
+    INT             shift and go to state 35
+    DOUBLE          shift and go to state 36
+    CHAR            shift and go to state 37
+
+    parametros                     shift and go to state 33
+
+state 27
+
+    (1) declaracion -> STRING ID IGUAL CADENA . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 38
+
+
+state 28
+
+    (6) declaracion -> ID IGUAL identificador PUNTOCOMA .
+
+    $end            reduce using rule 6 (declaracion -> ID IGUAL identificador PUNTOCOMA .)
+
+
+state 29
+
+    (2) declaracion -> INT ID IGUAL ENTERO . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 39
+
+
+state 30
+
+    (3) declaracion -> CHAR ID IGUAL CARACTER . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 40
+
+
+state 31
+
+    (4) declaracion -> DOUBLE ID IGUAL DECIMAL . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 41
+
+
+state 32
+
+    (5) declaracion -> BOOLEAN ID IGUAL ID . PUNTOCOMA
+
+    PUNTOCOMA       shift and go to state 42
+
+
+state 33
+
+    (7) declaracion -> VOID ID PARIZQ parametros . PARDER
+
+    PARDER          shift and go to state 43
+
+
+state 34
+
+    (12) parametros -> STRING . ID
+    (13) parametros -> STRING . ID COMA
+
+    ID              shift and go to state 44
+
+
+state 35
+
+    (14) parametros -> INT . ID
+    (15) parametros -> INT . ID COMA parametros
+
+    ID              shift and go to state 45
+
+
+state 36
+
+    (16) parametros -> DOUBLE . ID
+    (17) parametros -> DOUBLE . ID COMA parametros
+
+    ID              shift and go to state 46
+
+
+state 37
+
+    (18) parametros -> CHAR . ID
+    (19) parametros -> CHAR . ID COMA parametros
+
+    ID              shift and go to state 47
+
+
+state 38
+
+    (1) declaracion -> STRING ID IGUAL CADENA PUNTOCOMA .
+
+    $end            reduce using rule 1 (declaracion -> STRING ID IGUAL CADENA PUNTOCOMA .)
+
+
+state 39
+
+    (2) declaracion -> INT ID IGUAL ENTERO PUNTOCOMA .
+
+    $end            reduce using rule 2 (declaracion -> INT ID IGUAL ENTERO PUNTOCOMA .)
+
+
+state 40
+
+    (3) declaracion -> CHAR ID IGUAL CARACTER PUNTOCOMA .
+
+    $end            reduce using rule 3 (declaracion -> CHAR ID IGUAL CARACTER PUNTOCOMA .)
+
+
+state 41
+
+    (4) declaracion -> DOUBLE ID IGUAL DECIMAL PUNTOCOMA .
+
+    $end            reduce using rule 4 (declaracion -> DOUBLE ID IGUAL DECIMAL PUNTOCOMA .)
+
+
+state 42
+
+    (5) declaracion -> BOOLEAN ID IGUAL ID PUNTOCOMA .
+
+    $end            reduce using rule 5 (declaracion -> BOOLEAN ID IGUAL ID PUNTOCOMA .)
+
+
+state 43
+
+    (7) declaracion -> VOID ID PARIZQ parametros PARDER .
+
+    $end            reduce using rule 7 (declaracion -> VOID ID PARIZQ parametros PARDER .)
+
+
+state 44
+
+    (12) parametros -> STRING ID .
+    (13) parametros -> STRING ID . COMA
+
+    PARDER          reduce using rule 12 (parametros -> STRING ID .)
+    COMA            shift and go to state 48
+
+
+state 45
+
+    (14) parametros -> INT ID .
+    (15) parametros -> INT ID . COMA parametros
+
+    PARDER          reduce using rule 14 (parametros -> INT ID .)
+    COMA            shift and go to state 49
+
+
+state 46
+
+    (16) parametros -> DOUBLE ID .
+    (17) parametros -> DOUBLE ID . COMA parametros
+
+    PARDER          reduce using rule 16 (parametros -> DOUBLE ID .)
+    COMA            shift and go to state 50
+
+
+state 47
+
+    (18) parametros -> CHAR ID .
+    (19) parametros -> CHAR ID . COMA parametros
+
+    PARDER          reduce using rule 18 (parametros -> CHAR ID .)
+    COMA            shift and go to state 51
+
+
+state 48
+
+    (13) parametros -> STRING ID COMA .
+
+    PARDER          reduce using rule 13 (parametros -> STRING ID COMA .)
+
+
+state 49
+
+    (15) parametros -> INT ID COMA . parametros
+    (12) parametros -> . STRING ID
+    (13) parametros -> . STRING ID COMA
+    (14) parametros -> . INT ID
+    (15) parametros -> . INT ID COMA parametros
+    (16) parametros -> . DOUBLE ID
+    (17) parametros -> . DOUBLE ID COMA parametros
+    (18) parametros -> . CHAR ID
+    (19) parametros -> . CHAR ID COMA parametros
+
+    STRING          shift and go to state 34
+    INT             shift and go to state 35
+    DOUBLE          shift and go to state 36
+    CHAR            shift and go to state 37
+
+    parametros                     shift and go to state 52
+
+state 50
+
+    (17) parametros -> DOUBLE ID COMA . parametros
+    (12) parametros -> . STRING ID
+    (13) parametros -> . STRING ID COMA
+    (14) parametros -> . INT ID
+    (15) parametros -> . INT ID COMA parametros
+    (16) parametros -> . DOUBLE ID
+    (17) parametros -> . DOUBLE ID COMA parametros
+    (18) parametros -> . CHAR ID
+    (19) parametros -> . CHAR ID COMA parametros
+
+    STRING          shift and go to state 34
+    INT             shift and go to state 35
+    DOUBLE          shift and go to state 36
+    CHAR            shift and go to state 37
+
+    parametros                     shift and go to state 53
+
+state 51
+
+    (19) parametros -> CHAR ID COMA . parametros
+    (12) parametros -> . STRING ID
+    (13) parametros -> . STRING ID COMA
+    (14) parametros -> . INT ID
+    (15) parametros -> . INT ID COMA parametros
+    (16) parametros -> . DOUBLE ID
+    (17) parametros -> . DOUBLE ID COMA parametros
+    (18) parametros -> . CHAR ID
+    (19) parametros -> . CHAR ID COMA parametros
+
+    STRING          shift and go to state 34
+    INT             shift and go to state 35
+    DOUBLE          shift and go to state 36
+    CHAR            shift and go to state 37
+
+    parametros                     shift and go to state 54
+
+state 52
+
+    (15) parametros -> INT ID COMA parametros .
+
+    PARDER          reduce using rule 15 (parametros -> INT ID COMA parametros .)
+
+
+state 53
+
+    (17) parametros -> DOUBLE ID COMA parametros .
+
+    PARDER          reduce using rule 17 (parametros -> DOUBLE ID COMA parametros .)
+
+
+state 54
+
+    (19) parametros -> CHAR ID COMA parametros .
+
+    PARDER          reduce using rule 19 (parametros -> CHAR ID COMA parametros .)
 

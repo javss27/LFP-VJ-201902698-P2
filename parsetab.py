@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'leftIGUALACIONDIFERENCIACIONleftMENORQUEMAYORQUEMAYORIGUALMENORIGUALIGUALleftSUMARESTAleftMULTDIVMODrightNOTAND BOOLEAN CADENA CARACTER CHAR COMA COMDOBLE COMILLA DECIMAL DIFERENCIACION DIV DO DOUBLE ELSE ENTERO ID IF IGUAL IGUALACION INT LLAVEDER LLAVEIZQ MAYOR MAYORIGUAL MAYORQUE MENOR MENORIGUAL MENORQUE MOD MULT NOT OR PARDER PARIZQ PUNTO PUNTOCOMA RESTA RETURN STRING SUMA VOID WHILE\n    declaracion : STRING ID IGUAL CADENA\n        | CHAR ID IGUAL CARACTER\n        | INT ID IGUAL ENTERO\n        | DOUBLE ID IGUAL DECIMAL\n        | BOOLEAN ID IGUAL ID\n    '
+_lr_signature = 'leftIGUALACIONDIFERENCIACIONleftMENORQUEMAYORQUEMAYORIGUALMENORIGUALIGUALleftSUMARESTAleftMULTDIVMODrightNOTAND BOOLEAN CADENA CARACTER CHAR COMA COMDOBLE COMILLA DECIMAL DIFERENCIACION DIV DO DOUBLE ELSE ENTERO ID IF IGUAL IGUALACION INT LLAVEDER LLAVEIZQ MAYOR MAYORIGUAL MAYORQUE MENOR MENORIGUAL MENORQUE MOD MULT NOT OR PARDER PARIZQ PUNTO PUNTOCOMA RESTA RETURN STRING SUMA VOID WHILE\n    declaracion : STRING ID IGUAL CADENA PUNTOCOMA\n        | INT ID IGUAL ENTERO PUNTOCOMA\n        | CHAR ID IGUAL CARACTER PUNTOCOMA\n        | DOUBLE ID IGUAL DECIMAL PUNTOCOMA\n        | BOOLEAN ID IGUAL ID PUNTOCOMA\n        | ID IGUAL identificador PUNTOCOMA\n        | VOID ID PARIZQ parametros PARDER \n    \n    identificador : DECIMAL\n        | CARACTER \n        | ID \n        | CADENA \n    \n    parametros : STRING ID \n        | STRING ID COMA\n        | INT ID\n        | INT ID COMA parametros\n        | DOUBLE ID\n        | DOUBLE ID COMA parametros\n        | CHAR ID\n        | CHAR ID COMA parametros\n    '
     
-_lr_action_items = {'STRING':([0,],[2,]),'CHAR':([0,],[3,]),'INT':([0,],[4,]),'DOUBLE':([0,],[5,]),'BOOLEAN':([0,],[6,]),'$end':([1,17,18,19,20,21,],[0,-1,-2,-3,-4,-5,]),'ID':([2,3,4,5,6,16,],[7,8,9,10,11,21,]),'IGUAL':([7,8,9,10,11,],[12,13,14,15,16,]),'CADENA':([12,],[17,]),'CARACTER':([13,],[18,]),'ENTERO':([14,],[19,]),'DECIMAL':([15,],[20,]),}
+_lr_action_items = {'STRING':([0,26,49,50,51,],[2,34,34,34,34,]),'INT':([0,26,49,50,51,],[4,35,35,35,35,]),'CHAR':([0,26,49,50,51,],[5,37,37,37,37,]),'DOUBLE':([0,26,49,50,51,],[6,36,36,36,36,]),'BOOLEAN':([0,],[7,]),'ID':([0,2,4,5,6,7,8,10,25,34,35,36,37,],[3,9,11,12,13,14,15,17,32,44,45,46,47,]),'VOID':([0,],[8,]),'$end':([1,28,38,39,40,41,42,43,],[0,-6,-1,-2,-3,-4,-5,-7,]),'IGUAL':([3,9,11,12,13,14,],[10,16,22,23,24,25,]),'DECIMAL':([10,24,],[19,31,]),'CARACTER':([10,23,],[20,30,]),'CADENA':([10,16,],[21,27,]),'PARIZQ':([15,],[26,]),'PUNTOCOMA':([17,18,19,20,21,27,29,30,31,32,],[-10,28,-8,-9,-11,38,39,40,41,42,]),'ENTERO':([22,],[29,]),'PARDER':([33,44,45,46,47,48,52,53,54,],[43,-12,-14,-16,-18,-13,-15,-17,-19,]),'COMA':([44,45,46,47,],[48,49,50,51,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'declaracion':([0,],[1,]),}
+_lr_goto_items = {'declaracion':([0,],[1,]),'identificador':([10,],[18,]),'parametros':([26,49,50,51,],[33,52,53,54,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,9 +27,23 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> declaracion","S'",1,None,None,None),
-  ('declaracion -> STRING ID IGUAL CADENA','declaracion',4,'p_declaracion','analizadorsintactico.py',18),
-  ('declaracion -> CHAR ID IGUAL CARACTER','declaracion',4,'p_declaracion','analizadorsintactico.py',19),
-  ('declaracion -> INT ID IGUAL ENTERO','declaracion',4,'p_declaracion','analizadorsintactico.py',20),
-  ('declaracion -> DOUBLE ID IGUAL DECIMAL','declaracion',4,'p_declaracion','analizadorsintactico.py',21),
-  ('declaracion -> BOOLEAN ID IGUAL ID','declaracion',4,'p_declaracion','analizadorsintactico.py',22),
+  ('declaracion -> STRING ID IGUAL CADENA PUNTOCOMA','declaracion',5,'p_declaracion','analizadorsintactico.py',20),
+  ('declaracion -> INT ID IGUAL ENTERO PUNTOCOMA','declaracion',5,'p_declaracion','analizadorsintactico.py',21),
+  ('declaracion -> CHAR ID IGUAL CARACTER PUNTOCOMA','declaracion',5,'p_declaracion','analizadorsintactico.py',22),
+  ('declaracion -> DOUBLE ID IGUAL DECIMAL PUNTOCOMA','declaracion',5,'p_declaracion','analizadorsintactico.py',23),
+  ('declaracion -> BOOLEAN ID IGUAL ID PUNTOCOMA','declaracion',5,'p_declaracion','analizadorsintactico.py',24),
+  ('declaracion -> ID IGUAL identificador PUNTOCOMA','declaracion',4,'p_declaracion','analizadorsintactico.py',25),
+  ('declaracion -> VOID ID PARIZQ parametros PARDER','declaracion',5,'p_declaracion','analizadorsintactico.py',26),
+  ('identificador -> DECIMAL','identificador',1,'p_identificador','analizadorsintactico.py',42),
+  ('identificador -> CARACTER','identificador',1,'p_identificador','analizadorsintactico.py',43),
+  ('identificador -> ID','identificador',1,'p_identificador','analizadorsintactico.py',44),
+  ('identificador -> CADENA','identificador',1,'p_identificador','analizadorsintactico.py',45),
+  ('parametros -> STRING ID','parametros',2,'p_parametros','analizadorsintactico.py',49),
+  ('parametros -> STRING ID COMA','parametros',3,'p_parametros','analizadorsintactico.py',50),
+  ('parametros -> INT ID','parametros',2,'p_parametros','analizadorsintactico.py',51),
+  ('parametros -> INT ID COMA parametros','parametros',4,'p_parametros','analizadorsintactico.py',52),
+  ('parametros -> DOUBLE ID','parametros',2,'p_parametros','analizadorsintactico.py',53),
+  ('parametros -> DOUBLE ID COMA parametros','parametros',4,'p_parametros','analizadorsintactico.py',54),
+  ('parametros -> CHAR ID','parametros',2,'p_parametros','analizadorsintactico.py',55),
+  ('parametros -> CHAR ID COMA parametros','parametros',4,'p_parametros','analizadorsintactico.py',56),
 ]

@@ -90,6 +90,8 @@ t_LLAVEIZQ = r'\{'
 t_LLAVEDER = r'\}'
 
 
+
+
 #metodo de cada reservada
 def t_STRING(t):
     r'string'
@@ -258,4 +260,4 @@ def lecturaArchivo(ruta):     # validacion de la extension correcta
 
 
 #C:/Users/otrop/Desktop/LFP-JV-201902689-P1/pruebita.sc
-#lecturaArchivo("C:/Users/otrop/Desktop/LFP-JV-201902689-P2/prueba.sc")
+lecturaArchivo("C:/Users/otrop/Desktop/LFP-JV-201902689-P2/prueba2.sc")
