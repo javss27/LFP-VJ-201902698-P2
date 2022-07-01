@@ -28,6 +28,22 @@ Los conocimientos que deberán tener las personas que manejen el programa son:
 Se muestra la tabla de simbolos y caracteres utilizados.
 ![Esta es una imagen de ejemplo](tablas%20simbolos%20ER.JPG)
 
+### **Expresiones regulares** 
+En esta sección, se encuentran las Er utilizadas por medio de re.
+![Esta es una imagen de ejemplo](re.JPG)
+
+## **Tokens** 
+En esta sección, se encuentran los tokens a utilizar.
+![Esta es una imagen de ejemplo](tokens.JPG)
+
+### **Asociatividad** 
+En esta sección, se encuentra la asociatividad utilizada.
+![Esta es una imagen de ejemplo](asociatividad.JPG)
+
+### **Lexemas** 
+En esta sección, se encuentran los lexemas utilizados.
+![Esta es una imagen de ejemplo](lexemas.JPG)
+
 ### **Reglas establecidas** 
 En esta sección, se encuentra el codigo de las reglas utilizadas para las expresiones regulares ingresadas.
 ![Esta es una imagen de ejemplo](reglas.JPG)
