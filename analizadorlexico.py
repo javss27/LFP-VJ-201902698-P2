@@ -19,8 +19,33 @@ reservada = (
     'IF',
     'ELSE',
 )
+contenido = "<!DOCTYPE html>\n"
+contenido +="<html lang=\"en\">\n"
+contenido += "<head>"
+contenido +="<meta charset=\"UTF-8\">"
+contenido +="<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">"
+contenido += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+contenido +="<title>Document</title>"
+contenido +="</head>"
+contenido +="<body>"
+contenido += "<table  style=\"margin: 0 auto;\" class=\"default\">"
+contenido += "<tr> <td>Linea</td>   <td>tipo</td>    <td>Valor</td>  <td>posicion</td> </tr>"
+
+contenidor = "<!DOCTYPE html>\n"
+contenidor +="<html lang=\"en\">\n"
+contenidor += "<head>"
+contenidor +="<meta charset=\"UTF-8\">"
+contenidor +="<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">"
+contenidor += "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">"
+contenidor +="<title>Document</title>"
+contenidor +="</head>"
+contenidor +="<body>"
+contenidor += "<table  style=\"margin: 0 auto;\" class=\"default\">"
+contenidor += "<tr> <td>Linea</td>   <td>Columna</td>    <td>Tipo</td>  <td>Mensaje</td> </tr>"
 
 tokens = reservada + (
+    'COMENTLINE',
+    'COMENTLINES',
     'ID',
     'DECIMAL',
     'ENTERO',
@@ -181,12 +206,12 @@ def t_MENORIGUAL(t):
 
 #COMENTARIOS
 def t_COMENTLINE(t):
-    r'\/\/(.)*\n'
-    t.lexer.lineno+=1
+    r'\/\/(.)*'
     #print("cometariolinea:",t.lexpos,"linea",t.lineno)
+    return t
 
 def t_COMENTLINES(t):
-    r'(\/\*(\s*|.*?)*\*\/)'
+    r'(\/\*(.|\n)*?\*\/)'
     """ print("aber la t:",t) son valores que lleva la 't' osea el lexema
     print("aber la t:",t.type) tipo de token
     print("aber la t:",t.value) el contenido del lexema
@@ -196,7 +221,7 @@ def t_COMENTLINES(t):
     for x in t.value:
         if x == "\n":
             t.lexer.lineno+=1        
-    
+    return t
     #t.lexer.lineno+=1
     #print("cometariolineasss:",t.lexpos,"linea",t.lineno)
 
@@ -208,8 +233,8 @@ def t_newline(t):
 t_ignore= ' \t\r'
 
 def t_error(t):
-    global result_lexema
-    estado = "Toke no valido en la linea {:4} Valor {:6}".format(str(t.lineno),str(t.value),str(t.lexpos))
+    global result_lexema, contenidor
+    contenidor += "<tr> <td>"+str(t.lineno)+"</td><td>"+str(getColumn(t))+"</td>  <td>"+'lexico'+"</td>  <td>No se pudo reconocer el lexema: "+str(t.value)+"</td> </tr>\n"
     #result_lexema.append(estado)
     #print(estado)
     t.lexer.skip(1)
@@ -224,14 +249,47 @@ data1=""
 columna=0
 
 def prueba(data):
-    global result_lexema,data1
+    global result_lexema,data1,contenido,contenidor
     
     data1 = data.lower()
     analizador = lex.lex()
     analizador.input(data.lower())
     for tok in analizador:
         estado = "Linea {:4} Tipo {:6} Valor {:16} Posicion {:4}".format(str(tok.lineno),str(tok.type),str(tok.value),str(getColumn(tok)))
-        result_lexema.append(estado)
+        contenido += "<tr> <td>"+str(tok.lineno)+"</td><td>"+str(tok.type)+"</td>  <td>"+str(tok.value)+"</td>  <td>"+str(getColumn(tok))+"</td> </tr>\n"
+
+    contenido += " </table>"
+    contenido += "<style>"
+    contenido += "table,th,td{"
+    contenido += "border: 1px solid black;"
+    contenido += "}"
+    contenido += "    th,td{"
+    contenido += " padding: 5px;"
+    contenido += "}"
+    contenido += "</style>"
+    contenido += "</body>"
+    contenido += "</html>"
+    contenidor += " </table>"
+    contenidor += "<style>"
+    contenidor += "table,th,td{"
+    contenidor += "border: 1px solid black;"
+    contenidor += "}"
+    contenidor += "    th,td{"
+    contenidor += " padding: 5px;"
+    contenidor += "}"
+    contenidor += "</style>"
+    contenidor += "</body>"
+    contenidor += "</html>"
+    contenido = str.encode(contenido)
+    contenidor = str.encode(contenidor)
+    reporte= os.open("reporte-tokens.html", os.O_CREAT|os.O_RDWR)
+    os.write(reporte,contenido)
+    os.close(reporte)
+    reporter= os.open("reporte-errores.html", os.O_CREAT|os.O_RDWR)
+    os.write(reporter,contenidor)
+    os.close(reporter)
+
+
         #print("Linea:",str(tok.lineno), tok,"columna:",tok.lexpos,getColumn(tok))                          
 
 analizador = lex.lex()
@@ -260,4 +318,3 @@ def lecturaArchivo(ruta):     # validacion de la extension correcta
 
 
 #C:/Users/otrop/Desktop/LFP-JV-201902689-P1/pruebita.sc
-lecturaArchivo("C:/Users/otrop/Desktop/LFP-JV-201902689-P2/prueba2.sc")
